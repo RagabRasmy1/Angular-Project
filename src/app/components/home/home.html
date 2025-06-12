@@ -1,0 +1,70 @@
+<div class="max-w-5xl mx-auto px-4 py-8">
+  <div class="relative w-full">
+
+    <button (click)="login()" class="auth-btn">Login</button>
+    <button (click)="logout()" class="auth-btn logout">Logout</button>
+    
+    <div class="search-wrapper">
+  <input
+    type="search"
+    placeholder="Search Mockups, Logos, Design Templates..."
+    required
+    [(ngModel)]="searchTerm"
+    class="search-input"
+  />
+  <button type="submit" class="search-button">
+    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+      />
+    </svg>
+  </button>
+</div>
+  </div>
+
+  <app-products
+    [searchTerm]="searchTerm"
+    (newItemEvent)="addToCart($event)"
+  ></app-products>
+
+  <!-- cart -->
+  <h2 class="text-2xl mb-3">Cart</h2>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3">Product name</th>
+          <th scope="col" class="px-6 py-3">Price</th>
+          <th scope="col" class="px-6 py-3">Quantity</th>
+          <th scope="col" class="px-6 py-3">-</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of cart; track item.productId) {
+        <tr class="odd:bg-white even:bg-gray-50 even: border-b border-gray-200">
+          <th
+            scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+          >
+            {{ item.productName }}
+          </th>
+          <td class="px-6 py-4">{{item.productPrice | currency}}</td>
+          <td class="px-6 py-4">{{item.productQuantity}}</td>
+          <td class="px-6 py-4">
+            <a
+              href="#"
+              class="font-medium text-blue-600 hover:underline"
+              (click)="removeFromCart(item.productId)"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="form-container">
+    <form #signup="ngForm" (ngSubmit)="addUser()" novalidate>
+
+        <!-- Full Name -->
+        <div class="form-group">
+            <label>Full Name</label>
+            <input name="fullName" [(ngModel)]="userProp.fname" #fullName="ngModel" required minlength="5"
+                [ngClass]="{
+                  'invalid': fullName.invalid && fullName.touched,
+                  'valid': fullName.valid && fullName.touched
+                }" />
+            <div *ngIf="fullName.touched && fullName.invalid">
+                <div *ngIf="fullName.errors?.['required']" class="error">
+                    Full name is required.
+                </div>
+                <div *ngIf="fullName.errors?.['minlength']" class="warning">
+                    Minimum 5 characters required.
+                </div>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label>Email</label>
+            <input name="email" type="email" [(ngModel)]="userProp.email" #email="ngModel" required email
+                [ngClass]="{
+                  'invalid': email.invalid && email.touched,
+                  'valid': email.valid && email.touched
+                }" />
+            <div *ngIf="email.touched && email.invalid">
+                <div *ngIf="email.errors?.['required']" class="error">
+                    Email is required.
+                </div>
+                <div *ngIf="email.errors?.['email']" class="warning">
+                    Enter a valid email.
+                </div>
+            </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label>Password</label>
+            <input name="password" type="password" [(ngModel)]="userProp.password" #password="ngModel" required
+                minlength="6"
+                [ngClass]="{
+                  'invalid': password.invalid && password.touched,
+                  'valid': password.valid && password.touched
+                }" />
+            <div *ngIf="password.touched && password.invalid">
+                <div *ngIf="password.errors?.['required']" class="error">
+                    Password is required.
+                </div>
+                <div *ngIf="password.errors?.['minlength']" class="warning">
+                    Minimum 6 characters required.
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" [disabled]="signup.invalid">
+            Register
+        </button>
+
+        <div class="link-container">
+            <span>Already have an account?</span>
+            <a routerLink="/login">Login</a>
+        </div>
+
+    </form>
+</div>

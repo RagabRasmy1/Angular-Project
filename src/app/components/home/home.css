@@ -1,0 +1,68 @@
+.auth-btn {
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #2563eb; /* blue-600 */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-btn:hover {
+  background-color: #1d4ed8; /* blue-700 */
+  transform: translateY(-1px);
+}
+
+.auth-btn.logout {
+  background-color: #ef4444; /* red-500 */
+}
+
+.auth-btn.logout:hover {
+  background-color: #dc2626; /* red-600 */
+}
+
+
+.search-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  margin: 20px 0;
+  border: 2px solid #d1d5db; /* gray-300 */
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f9fafb; /* gray-50 */
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #111827; /* gray-900 */
+}
+
+.search-button {
+  padding: 0 16px;
+  background-color: #2563eb; /* blue-600 */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #1e40af; /* blue-800 */
+}
+
+.search-button .icon {
+  width: 20px;
+  height: 20px;
+  stroke: white;
+}
