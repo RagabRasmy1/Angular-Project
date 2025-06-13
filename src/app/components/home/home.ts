@@ -2,13 +2,14 @@ import { Component, inject } from '@angular/core';
 import { Products } from '../products/products';
 import { FormsModule } from '@angular/forms';
 import { Iproduct } from '../../models/iproduct';
-import { pipe } from 'rxjs';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { CartPipePipe } from '../../pipes/cart-pipe-pipe';
 import { UserAuth } from '../../services/user-auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [Products, FormsModule, CurrencyPipe, DatePipe, CartPipePipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
@@ -17,6 +18,14 @@ export class Home {
   searchTerm: string = '';
   cart: Iproduct[] = [];
   date: Date = new Date();
+
+  userAuth = inject(UserAuth);
+  router = inject(Router);
+
+  get isUserLoggedProp(): boolean {
+    return this.userAuth.isUserLogged;
+  }
+
   addToCart(product: Iproduct): void {
     const existingProduct = this.cart.find(
       (p) => p.productId === product.productId
@@ -32,22 +41,14 @@ export class Home {
   removeFromCart(id: number): void {
     this.cart = this.cart.filter((product) => product.productId !== id);
   }
-  isUserLoggedProp:boolean=false
-  userAuth=inject(UserAuth)
-  
-  constructor(){
-    this.isUserLoggedProp=this.userAuth.isUserLogged
-  }
-  
-  login(){
-    this.userAuth.login("ragab@gmail.com","123456")
-    this.isUserLoggedProp=this.userAuth.isUserLogged
 
+  login(): void {
+    this.userAuth.login("ragab@gmail.com", "123456");
+    this.router.navigate(['/home']);
   }
 
-  logout(){
-    this.userAuth.logout()
-    this.isUserLoggedProp=this.userAuth.isUserLogged
-
+  logout(): void {
+    this.userAuth.logout();
+    this.router.navigate(['/login']);
   }
 }

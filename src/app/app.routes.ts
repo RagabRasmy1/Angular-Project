@@ -7,6 +7,7 @@ import { ProductDetails } from './components/product-details/product-details';
 import { StoreDisplay } from './components/store-display/store-display';
 import { Signup } from './components/signup/signup';
 import { Login } from './components/login/login';
+import { loginGuard } from './Guards/login-guard';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,7 @@ export const routes: Routes = [
       {
         path: 'home',
         component: Home,
+        canActivate:[loginGuard]
       },
       {
         path: 'contact',

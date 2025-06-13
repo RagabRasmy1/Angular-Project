@@ -18,4 +18,8 @@ export class Nav {
       this.userLoggedInNav=data
     })
   }
+
+  logout() {
+  this.userAuth.logout();
+}
 }
