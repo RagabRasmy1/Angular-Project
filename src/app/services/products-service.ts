@@ -118,4 +118,8 @@ export class ProductsService {
   getAllIds(): number[] {
     return this.allIds;
   }
+
+  addProduct(product: Iproduct) {
+    this.products.push(product);
+  }
 }
