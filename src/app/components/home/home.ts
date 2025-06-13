@@ -32,13 +32,22 @@ export class Home {
   removeFromCart(id: number): void {
     this.cart = this.cart.filter((product) => product.productId !== id);
   }
-
+  isUserLoggedProp:boolean=false
   userAuth=inject(UserAuth)
+  
+  constructor(){
+    this.isUserLoggedProp=this.userAuth.isUserLogged
+  }
+  
   login(){
     this.userAuth.login("ragab@gmail.com","123456")
+    this.isUserLoggedProp=this.userAuth.isUserLogged
+
   }
 
   logout(){
     this.userAuth.logout()
+    this.isUserLoggedProp=this.userAuth.isUserLogged
+
   }
 }

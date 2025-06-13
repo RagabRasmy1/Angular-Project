@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { UserAuth } from '../../services/user-auth';
 
 @Component({
   selector: 'app-nav',
@@ -7,4 +8,14 @@ import { RouterLink } from '@angular/router';
   templateUrl: './nav.html',
   styleUrl: './nav.css',
 })
-export class Nav {}
+export class Nav {
+
+  userLoggedInNav:boolean=false
+  constructor(private userAuth:UserAuth){
+
+    // this.userLoggedInNav=this.userAuth.isUserLogged
+    this.userAuth.userLoggedMethod().subscribe((data)=>{
+      this.userLoggedInNav=data
+    })
+  }
+}

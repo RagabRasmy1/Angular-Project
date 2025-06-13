@@ -1,3 +1,4 @@
+import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -5,15 +6,19 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserAuth {
-
-   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
-
-  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+  //1 عرفت بروبيرتي النوع بتاعها بيهافيور سابجيكت 
+propSub:BehaviorSubject<boolean>
+constructor(){
+  //2 give it intial value      generic type
+  this.propSub=new BehaviorSubject<boolean>(false)
+}
 
   login(email: string, password: string): boolean {
-    // تأكد إنك ما بترجعش object بدل boolean
+    let token="0000000000000"
     if (email === 'ragab@gmail.com' && password === '123456') {
-      localStorage.setItem('user', JSON.stringify({ email }));
+      localStorage.setItem('userToken', token);
+      //bind on it by difualt
+      this.propSub.next(true)
       return true;
     }
     return false;
@@ -22,10 +27,15 @@ export class UserAuth {
 
   logout(): void {
     localStorage.removeItem('userToken');
-    this.isLoggedInSubject.next(false);
+    this.propSub.next(false)
   }
 
-  private hasToken(): boolean {
-    return !!localStorage.getItem('userToken');
+  get isUserLogged():boolean{
+    return (localStorage.getItem('userToken'))?true:false
+  }
+
+
+  userLoggedMethod(){
+    return this.propSub
   }
 }
